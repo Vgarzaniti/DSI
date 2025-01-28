@@ -24,7 +24,7 @@ class Conexion(models.Model):
     idconexion = models.AutoField(db_column='idConexion', primary_key=True)  # Field name made lowercase.
     fechaalta = models.DateTimeField(db_column='fechaAlta')  # Cambiado a DateTimeField
     numero = models.IntegerField(unique=True)
-    idcliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='idCliente')  # Cambiado a ForeignKey
+    idcliente = models.ForeignKey('Cliente', on_delete=models.CASCADE, db_column='idCliente')  # Cambiado a ForeignKey
     idservicio = models.ForeignKey('Servicio', on_delete=models.CASCADE, db_column='idServicio')  # Cambiado a ForeignKey
     iddireccion = models.ForeignKey('Domicilio', on_delete=models.CASCADE, db_column='idDireccion')  # Cambiado a ForeignKey
 
@@ -36,9 +36,9 @@ class Conexion(models.Model):
 class Domicilio(models.Model):
     iddomicilio = models.AutoField(db_column='idDomicilio', primary_key=True)  # Field name made lowercase.
     calle = models.TextField()
-    departamento = models.TextField(blank=True, null=False)
+    departamento = models.TextField(blank=True, null=True)
     numero = models.IntegerField()
-    piso = models.IntegerField(blank=True, null=False)
+    piso = models.IntegerField(blank=True, null=True)
     idlocalidad = models.ForeignKey('Localidad', on_delete=models.CASCADE, db_column='idLocalidad')  # Cambiado a ForeignKey
 
     class Meta:
@@ -54,14 +54,22 @@ class Localidad(models.Model):
         managed = False
         db_table = 'Localidad'
 
+class Servicio(models.Model):
+    idservicio = models.AutoField(db_column='idServicio', primary_key=True)  # Field name made lowercase.
+    cantidadmegas = models.IntegerField(db_column='cantidadMegas')  # Field name made lowercase.
+    precio = models.FloatField()
 
-class Operacion(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'Servicio'
+
+"""class Operacion(models.Model):
     idoperacion = models.AutoField(db_column='idOperacion', primary_key=True)  # Field name made lowercase.
     fechahora = models.DateTimeField(db_column='fechaHora')  # Cambiado a DateTimeField
     motivo = models.TextField()
     numero = models.IntegerField(unique=True)
     idpersona = models.ForeignKey('Persona', on_delete=models.CASCADE, db_column='idPersona')  # Cambiado a ForeignKey
-    idconexion = models.ForeignKey(Conexion, on_delete=models.CASCADE, db_column='idConexion')  # Cambiado a ForeignKey
+    idconexion = models.ForeignKey('Conexion', on_delete=models.CASCADE, db_column='idConexion')  # Cambiado a ForeignKey
 
     class Meta:
         managed = False
@@ -79,14 +87,7 @@ class Persona(models.Model):
         db_table = 'Persona'
 
 
-class Servicio(models.Model):
-    idservicio = models.AutoField(db_column='idServicio', primary_key=True)  # Field name made lowercase.
-    cantidadmegas = models.IntegerField(db_column='cantidadMegas')  # Field name made lowercase.
-    precio = models.FloatField()
 
-    class Meta:
-        managed = False
-        db_table = 'Servicio'
 
 
 class Visita(models.Model):
@@ -106,7 +107,7 @@ class Visita(models.Model):
     class Meta:
         managed = False
         db_table = 'Visita'
-
+"""""
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
