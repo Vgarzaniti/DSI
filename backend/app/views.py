@@ -67,13 +67,10 @@ class DomicilioCreateView(APIView):
         # Si los datos no son válidos, devolvemos los errores
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-class CrearConexionAPIVirew(APIView):
+class CrearConexionAPIView(APIView):
     def post(self, request, format=None):
-        # Validamos y creamos una nueva conexión
         serializer = ConexionSerializer(data=request.data)
-        
         if serializer.is_valid():
-            # Guardar la conexión
             conexion = serializer.save()
             return Response({
                 'message': 'Conexión creada exitosamente',

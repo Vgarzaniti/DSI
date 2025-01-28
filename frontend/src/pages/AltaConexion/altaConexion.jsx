@@ -172,7 +172,7 @@ export default function AltaConexion() {
         const day = String(formattedDate.getDate()).padStart(2, "0");
         const month = String(formattedDate.getMonth() + 1).padStart(2, "0");
         const year = formattedDate.getFullYear();
-        const finalDate = `${day}/${month}/${year}`;
+        const finalDate = `${year}-${month}-${day}`;
         setSelectedDate(finalDate);
     }, []);
 
@@ -215,19 +215,22 @@ export default function AltaConexion() {
 
     const handleSubmitConexion = async (e) => {
         e.preventDefault();
+        
+        // Verificar si los campos obligatorios están llenos
         if (!idCliente || !idServicio || !domicilioId || !numero) {
             alert("Por favor, complete todos los campos antes de guardar la conexión.");
             return;
         }
+        
         // Crear el payload de la conexión
         const data = {
             fechaalta: selectedDate,  // Fecha de alta
-            numero: numero,        // Número de la conexión
-            idcliente: idCliente,  // ID del cliente seleccionado
-            idservicio: idServicio, // ID del servicio seleccionado
-            iddireccion: domicilioId, // ID del domicilio seleccionado
+            numero: numero,           // Número de la conexión
+            idcliente: idCliente,     // ID del cliente seleccionado
+            idservicio: idServicio,   // ID del servicio seleccionado
+            iddomicilio: domicilioId, // ID del domicilio seleccionado
         };
-    
+        alert("Datos a enviar al servidor:\n" + JSON.stringify(data, null, 2));
         console.log("Datos enviados al servidor:", data); // Para verificar el payload
     
         try {
@@ -240,18 +243,20 @@ export default function AltaConexion() {
                 body: JSON.stringify(data),
             });
     
-            if (response.ok) {
+            if (response.ok || response.status === 201) {
                 const result = await response.json();
-                alert("Conexión creada con éxito:",result);
+                alert("Conexión creada con éxito: " + JSON.stringify(result)); // Mostrar el resultado en un alert
                 setMensaje("Conexión guardada exitosamente");
                 navigate("/conexiones");  // Redirigir a la lista de conexiones
             } else {
                 const errorData = await response.json();
                 console.error("Errores del servidor:", errorData);
+                alert('error del servidor')
                 setMensaje("Error al guardar la conexión");
             }
         } catch (error) {
             console.error("Error al conectar con el servidor:", error);
+            alert('error al conectar ocn el servidor')
             setMensaje("Error al conectar con el servidor");
         }
     };

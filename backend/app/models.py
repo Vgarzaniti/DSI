@@ -16,7 +16,6 @@ class Cliente(models.Model):
     numtel = models.IntegerField(db_column='numTel')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'Cliente'
 
 
@@ -26,10 +25,8 @@ class Conexion(models.Model):
     numero = models.IntegerField(unique=True)
     idcliente = models.ForeignKey('Cliente', on_delete=models.CASCADE, db_column='idCliente')  # Cambiado a ForeignKey
     idservicio = models.ForeignKey('Servicio', on_delete=models.CASCADE, db_column='idServicio')  # Cambiado a ForeignKey
-    iddomicilio = models.ForeignKey('Domicilio', on_delete=models.CASCADE, db_column='idDireccion')  # Cambiado a ForeignKey
-
+    iddomicilio = models.ForeignKey('Domicilio', on_delete=models.CASCADE, db_column='idDomicilio')  # Cambiado a ForeignKey
     class Meta:
-        managed = False
         db_table = 'Conexion'
 
 
@@ -42,7 +39,6 @@ class Domicilio(models.Model):
     idlocalidad = models.ForeignKey('Localidad', on_delete=models.CASCADE, db_column='idLocalidad')  # Cambiado a ForeignKey
 
     class Meta:
-        managed = False
         db_table = 'Domicilio'
 
 
@@ -51,7 +47,6 @@ class Localidad(models.Model):
     nombre = models.TextField()
 
     class Meta:
-        managed = False
         db_table = 'Localidad'
 
 class Servicio(models.Model):
@@ -60,7 +55,6 @@ class Servicio(models.Model):
     precio = models.FloatField()
 
     class Meta:
-        managed = False
         db_table = 'Servicio'
 
 """class Operacion(models.Model):
