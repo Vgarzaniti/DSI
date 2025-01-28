@@ -1,14 +1,20 @@
+h2 {
+    color: black;
+    align-self: center;
+}
+
 .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;  
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    background: #f9f9f9;
+    background: rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
 }
 
 .form-group {
@@ -27,22 +33,56 @@
 
 .input-field label {
     font-size: 14px;
+    color:black;
 }
+
+.input {
+    width: 170px;
+    height: 20px;
+    padding: 7px;
+    font-size: 14px;
+    border: 1px solid black;
+    background: transparent;
+    border-radius: 10px;
+    color:black;
+}
+
+.input:focus {
+    border-color: rgba(240, 38, 38, 0.7) !important; 
+    outline: none; 
+}
+
 
 .select {
-    width: 100%;
-    max-height: 4px;
-    padding: 10px !important;
+    width: 190px;
+    height: 35px;
+    padding: 5px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
     border-radius: 10px;
 }
 
-.input, .select {
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+.MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color:  rgba(240, 38, 38, 0.4) !important;
 }
+
+.select, .MuiSelect-select {
+    color: black !important;
+}
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: black !important;
+}
+
+.MuiSelect-icon {
+    color: black !important;  
+}
+
+.MuiMenuItem-root {
+    color: black !important; 
+    background-color: white !important;  
+}
+
 
 .tabs {
     width: 100%;
@@ -68,7 +108,7 @@
 }
 
 .button {
-    background-color: rgb(168, 39, 39);
+    background-color: rgb(200, 27, 27);
     color: white;
     padding: 10px;
     border: none;

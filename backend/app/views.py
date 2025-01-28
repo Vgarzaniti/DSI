@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Servicio,Conexion, Localidad,Cliente
-from .serializers import ServicioSerializer,LocalidadSerializer,ClienteSerializer
+from .serializers import ServicioSerializer,LocalidadSerializer,ClienteSerializer,DomicilioSerializer
 
 class ServicioListView(APIView):
     def get(self, request, format=None):
@@ -37,3 +37,28 @@ class ClienteSearchView(APIView):
         clientes = Cliente.objects.filter(dni__icontains=dni)  # Filtrar por DNI (con 'icontains' para buscar coincidencias parciales)
         serializer = ClienteSerializer(clientes, many=True)
         return Response(serializer.data)
+    
+    def post(self, request, *args, **kwargs):
+        # Crear el serializador y validar los datos
+        serializer = ClienteSerializer(data=request.data)
+        if serializer.is_valid():
+            # Guardar el cliente y devolver la respuesta
+            cliente = serializer.save()
+            return Response({
+                "idcliente": cliente.idcliente,
+                "dni": cliente.dni,
+                "nombre": cliente.nombre,
+                "apellido": cliente.apellido,
+                "numtel": cliente.numtel
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class DomicilioCreateView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = DomicilioSerializer(data=request.data)
+
+        if serializer.is_valid():
+            # Guardamos el domicilio
+            domicilio = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
