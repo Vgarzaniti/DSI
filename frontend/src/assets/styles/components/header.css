@@ -2,7 +2,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: url('../../images/fondo.jpg') center/cover no-repeat;
+    background-image: url('../../images/fondo1.jpg');
+    background-size: cover; 
 }
 
 nav {

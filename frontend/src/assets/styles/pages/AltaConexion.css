@@ -1,8 +1,47 @@
-.container {
+.form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;  
+    width: 100%;
+    max-width: 400px;
     padding: 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px; 
+}
+
+.input-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.input-field label {
+    font-size: 14px;
+}
+
+.select {
+    width: 100%;
+    max-height: 4px;
+    padding: 10px !important;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.input, .select {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 .tabs {
@@ -12,41 +51,33 @@
 }
 
 .tab {
-    font-size: 16px;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    border: 1px solid #ddd;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid transparent;
     border-radius: 8px;
-    background: #f9f9f9;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.input, .select {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.tab.Mui-selected {
+    color: red !important; 
+}
+
+.tab:hover {
+    color: red; 
 }
 
 .button {
-    background-color: #1976d2;
+    background-color: rgb(168, 39, 39);
     color: white;
     padding: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 50px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
 }
 
 .button:hover {
-    background-color: #1565c0;
+    background-color: rgb(233, 43, 43);
 }

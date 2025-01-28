@@ -23,10 +23,10 @@ function Header() {
                         <li onClick={toggleMenu}>Menú</li>
                         {menuVisible && ( // Renderiza el menú si está visible
                             <ul className="menu_vertical">
-                                <li><Link to="/Conexiones">Alta Conexion</Link></li>
-                                <li><Link to="/AltaCliente">Alta Cliente</Link></li>
-                                <li><Link to="/AltaOperacion">Alta Operacion</Link></li>
-                                <li><Link to="/ProgramarVisita">Programar Visita</Link></li>
+                                <li><Link to="/conexiones">Alta Conexion</Link></li>
+                                <li><Link to="/altaCliente">Alta Cliente</Link></li>
+                                <li><Link to="/altaOperacion">Alta Operacion</Link></li>
+                                <li><Link to="/programarVisita">Programar Visita</Link></li>
                             </ul>
                         )}
                     </ul>
