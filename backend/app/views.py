@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Servicio,Conexion, Localidad,Cliente
-from .serializers import ServicioSerializer,LocalidadSerializer,ClienteSerializer,DomicilioSerializer
+from .serializers import ServicioSerializer,LocalidadSerializer,ClienteSerializer,DomicilioSerializer,ConexionSerializer
 
 class ServicioListView(APIView):
     def get(self, request, format=None):
@@ -55,10 +55,28 @@ class ClienteSearchView(APIView):
     
 class DomicilioCreateView(APIView):
     def post(self, request, *args, **kwargs):
+        # Usamos el serializer para validar y guardar los datos
         serializer = DomicilioSerializer(data=request.data)
 
         if serializer.is_valid():
-            # Guardamos el domicilio
+            # Guardamos el domicilio en la base de datos
             domicilio = serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            # Devolvemos la respuesta con los datos del domicilio creado, incluyendo su ID
+            return Response({'iddomicilio': domicilio.iddomicilio}, status=status.HTTP_201_CREATED)
+        
+        # Si los datos no son válidos, devolvemos los errores
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class CrearConexionAPIVirew(APIView):
+    def post(self, request, format=None):
+        # Validamos y creamos una nueva conexión
+        serializer = ConexionSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            # Guardar la conexión
+            conexion = serializer.save()
+            return Response({
+                'message': 'Conexión creada exitosamente',
+                'data': ConexionSerializer(conexion).data
+            }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -3,6 +3,28 @@ h2 {
     align-self: center;
 }
 
+.back-button {
+    z-index: 100;
+    background-color: transparent;  
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-button .MuiSvgIcon-root {
+    font-size: 30px;
+    color: black; 
+    transition: color 0.3s ease; 
+}
+
+.back-button:hover {
+    background-color: black; 
+    color: red;              
+}
+
+.back-button:hover .MuiSvgIcon-root {
+    color: red;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -96,7 +118,7 @@ h2 {
     padding: 10px 20px;
     border: 1px solid transparent;
     border-radius: 8px;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .tab.Mui-selected {
@@ -105,6 +127,32 @@ h2 {
 
 .tab:hover {
     color: red; 
+}
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 0; 
+}
+  
+.search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    width: 350px;
+}
+  
+.MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+  
+.MuiInput-underline:after {
+    border-bottom: 2px solid rgba(240, 38, 38, 0.4) !important;
+}
+
+.MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid rgba(240, 38, 38, 0.4) !important;
 }
 
 .button {
@@ -120,4 +168,59 @@ h2 {
 
 .button:hover {
     background-color: rgb(233, 43, 43);
+}
+
+/* Contenedor para centrar la lista */
+.suggestion-list-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* Estilo para la lista de clientes */
+.MuiList-root {
+    width: 350px; /* Ancho fijo para mejor alineación */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+}
+
+.MuiListItem-root:hover {
+    background:rgba(240, 38, 38, 0.4);
+    transform: scale(1.01);
+}
+
+/* Estilo para la tabla */
+.MuiPaper-root {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.MuiTable-root {
+    background: white;
+}
+
+.MuiTableHead-root {
+    background: rgba(200, 27, 27, 0.7);
+}
+
+.MuiTableCell-root {
+    color: white;
+    font-weight: bold;
+}
+
+.MuiTableBody-root .MuiTableCell-root {
+    color: black;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.MuiTableRow-root {
+    transition: background-color 0.3s;
+}
+
+.MuiTableRow-root:hover {
+    background: rgba(240, 38, 38, 0.1);
 }

@@ -19,12 +19,12 @@ function Header() {
             <div>
                 <nav>
                     <ul className="menu_horizontal">
-                        <li onClick={inicio}>Inicio</li>
+                        <li onClick={inicio}>Actividad 6</li>
                         <li onClick={toggleMenu}>Menú</li>
                         {menuVisible && ( // Renderiza el menú si está visible
                             <ul className="menu_vertical">
                                 <li><Link to="/conexiones">Alta Conexion</Link></li>
-                                <li><Link to="/altaCliente">Alta Cliente</Link></li>
+                                <li><Link to="/cliente">Alta Cliente</Link></li>
                                 <li><Link to="/altaOperacion">Alta Operacion</Link></li>
                                 <li><Link to="/programarVisita">Programar Visita</Link></li>
                             </ul>

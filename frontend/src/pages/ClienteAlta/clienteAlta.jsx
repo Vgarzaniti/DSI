@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/pages/AltaCliente.css";
@@ -55,51 +55,61 @@ export default function AltaCliente() {
     };
 
     return (
-        <div className="container">
+        <>
             <IconButton onClick={handleBack} className="back-button">
                 <ArrowBackIcon />
             </IconButton>
-            <h2>Alta de Cliente</h2>
-            <form onSubmit={handleSubmit} className="form">
-                <TextField
-                    label="DNI"
-                    value={dni}
-                    onChange={(e) => setDni(e.target.value)}
-                    className="input"
-                    type="number"
-                    required
-                />
-
-                <TextField
-                    label="Nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    className="input"
-                    required
-                />
-
-                <TextField
-                    label="Apellido"
-                    value={apellido}
-                    onChange={(e) => setApellido(e.target.value)}
-                    className="input"
-                    required
-                />
-
-                <TextField
-                    label="Número de Teléfono"
-                    value={numTel}
-                    onChange={(e) => setNumTel(e.target.value)}
-                    className="input"
-                    type="tel"
-                    required
-                />
-
-                <Button type="submit" variant="contained" color="primary" className="button">
-                    Guardar Cliente
-                </Button>
-            </form>
-        </div>
-    );
+            
+            <div className="container">
+                <div className="content">
+                    <form onSubmit={handleSubmit} className="form">
+                        <h2>Alta de Cliente</h2>
+                        <div className="input-field">
+                            <label>DNI</label>
+                            <input
+                                value={dni}
+                                onChange={(e) => setDni(e.target.value)}
+                                className="input"
+                                type="dni"
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <div className="input-field">
+                                <label>Nombre</label>
+                                <input
+                                    value={nombre}
+                                    onChange={(e) => setNombre(e.target.value)}
+                                    className="input"
+                                    required
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label>Apellido</label>
+                                <input
+                                    value={apellido}
+                                    onChange={(e) => setApellido(e.target.value)}
+                                    className="input"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className="input-field">
+                            <label>Número de teléfono</label>
+                            <input
+                                value={numTel}
+                                onChange={(e) => setNumTel(e.target.value)}
+                                className="input"
+                                type="tel"
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="button">
+                            Guardar Cliente
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </>
+    );   
 }
-

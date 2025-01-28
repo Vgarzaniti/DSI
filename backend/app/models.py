@@ -22,11 +22,11 @@ class Cliente(models.Model):
 
 class Conexion(models.Model):
     idconexion = models.AutoField(db_column='idConexion', primary_key=True)  # Field name made lowercase.
-    fechaalta = models.DateTimeField(db_column='fechaAlta')  # Cambiado a DateTimeField
+    fechaalta = models.DateField(db_column='fechaAlta')  # Cambiado a DateTimeField
     numero = models.IntegerField(unique=True)
     idcliente = models.ForeignKey('Cliente', on_delete=models.CASCADE, db_column='idCliente')  # Cambiado a ForeignKey
     idservicio = models.ForeignKey('Servicio', on_delete=models.CASCADE, db_column='idServicio')  # Cambiado a ForeignKey
-    iddireccion = models.ForeignKey('Domicilio', on_delete=models.CASCADE, db_column='idDireccion')  # Cambiado a ForeignKey
+    iddomicilio = models.ForeignKey('Domicilio', on_delete=models.CASCADE, db_column='idDireccion')  # Cambiado a ForeignKey
 
     class Meta:
         managed = False

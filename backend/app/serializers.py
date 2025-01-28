@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Servicio,Localidad,Cliente,Domicilio
+from .models import Servicio,Localidad,Cliente,Domicilio,Conexion
 
 class ServicioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,7 +14,7 @@ class LocalidadSerializer(serializers.ModelSerializer):
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['dni', 'nombre', 'apellido', 'numtel']
+        fields = ['idcliente','dni', 'nombre', 'apellido', 'numtel']
 
 class LocalidadNomSerializer(serializers.Serializer):
     nombre = serializers.CharField()
@@ -39,6 +39,13 @@ class DomicilioSerializer(serializers.ModelSerializer):
         localidad = validated_data.pop('idlocalidad')
         domicilio = Domicilio.objects.create(idlocalidad=localidad, **validated_data)
         return domicilio
+    
+
+class ConexionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Conexion
+        fields = ['idconexion', 'fechaalta', 'numero', 'idcliente', 'idservicio', 'iddomicilio']
+
 
 
 
