@@ -25,7 +25,6 @@ import { useNavigate } from "react-router-dom"; // Importar el hook
 export default function AltaConexion() {
     const navigate = useNavigate(); // Inicializar el hook
     const [tabIndex, setTabIndex] = useState(0);
-    const [searchTerm, setSearchTerm] = useState("");
     const [selectedMegas, setSelectedMegas] = useState("");
     const [megasDisponibles, setMegasDisponibles] = useState([]);
     const [precio, setPrecio] = useState(0);
@@ -40,6 +39,55 @@ export default function AltaConexion() {
     const [departamento, setDepartamento] = useState("");
     const [numeroDomicilio, setNumeroDomicilio] = useState("");
     const [piso, setPiso] = useState("");
+    const [mensaje, setMensaje] = useState(""); 
+
+    const handleSubmitDomicilio = async (e) => {
+        e.preventDefault();
+
+        // Crear el payload inicial
+        const data = {
+            localidad: selectedLocalidad,
+            calle,
+            numero: numeroDomicilio,
+        };
+
+        // Agregar `departamento` y `piso` solo si tienen un valor
+        if (departamento) {
+            data.departamento = departamento;
+        }
+
+        if (piso) {
+            data.piso = piso;
+        }
+
+        console.log("Datos enviados al servidor:", data); // Para verificar el payload
+
+        try {
+            const response = await fetch("http://localhost:8000/app/Domicilio-crear/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+            console.log("Estado de la respuesta:", response.status);
+
+        if (response.ok) {
+            const result = await response.json();
+            alert("Domicilio guardado con éxito:",result);
+            console.log("Domicilio creado con éxito:", result);
+            setMensaje("Domicilio guardado exitosamente");
+        } else {
+            const errorData = await response.json();
+            console.error("Errores del servidor:", errorData);
+            setMensaje("Error al guardar el domicilio");
+        }
+        } catch (error) {
+            console.error("Error al conectar con el servidor:", error);
+            setMensaje("Error al conectar con el servidor");
+        }
+    };
 
     const searchClientes = (dni) => {
         fetch(`http://localhost:8000/app/cliente/?dni=${dni}`)
@@ -47,6 +95,7 @@ export default function AltaConexion() {
             .then((data) => setClientes(data))
             .catch((error) => console.error("Error buscando clientes:", error));
     };
+
 
     // Hacer la búsqueda en tiempo real
     const handleSearchChange = (e) => {
@@ -118,47 +167,6 @@ export default function AltaConexion() {
         }
     };
 
-    // Función para guardar en el localStorage
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const data = {
-            numero,
-            fecha_alta: selectedDate,
-            cantidad_megas: selectedMegas,
-            precio,
-            calle,
-            departamento,
-            numero_domicilio: numeroDomicilio,
-            piso,
-            localidad: selectedLocalidad,
-            cliente: selectedCliente?.idcliente, // Asumimos que el cliente tiene un idcliente
-        };
-
-        // Guardar los datos en el localStorage
-        localStorage.setItem("conexionData", JSON.stringify(data));
-
-        // Confirmación o redirigir después de guardar
-        console.log("Conexión guardada en localStorage:", data);
-        alert("Datos guardados en el localStorage");
-    };
-
-    // Recuperar los datos del localStorage cuando se monte el componente
-    useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem("conexionData"));
-        if (storedData) {
-            setNumero(storedData.numero);
-            setSelectedDate(storedData.fecha_alta);
-            setSelectedMegas(storedData.cantidad_megas);
-            setPrecio(storedData.precio);
-            setCalle(storedData.calle);
-            setDepartamento(storedData.departamento);
-            setNumeroDomicilio(storedData.numero_domicilio);
-            setPiso(storedData.piso);
-            setSelectedLocalidad(storedData.localidad);
-            setSelectedCliente(storedData.cliente); // Si quieres mostrar también el cliente
-        }
-    }, []); // Este useEffect solo se ejecuta una vez al montar el componente
 
     return (
         <div className="container">
@@ -178,7 +186,7 @@ export default function AltaConexion() {
             </Tabs>
             <div className="content">
                 {tabIndex === 0 && (
-                    <form className="form" onSubmit={handleSubmit}>
+                    <form className="form">
                         <h2>Cargar Datos de una Conexión</h2>
                         <div className="form-group">
                             <div className="input-field">
@@ -239,7 +247,7 @@ export default function AltaConexion() {
                 )}
 
                 {tabIndex === 1 && (
-                    <form className="form">
+                    <form className="form" onSubmit={handleSubmitDomicilio}>
                         <h2>Alta de un Domicilio</h2>
                         <div className="input-field">
                             <label>Localidad</label>
