@@ -1,54 +1,90 @@
-.header {
-    background-color: #f8f9fa; /* Fondo claro */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+/* Estilo general */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('../../images/fondo.jpg') center/cover no-repeat;
 }
 
-/* Estilo para el botón del menú */
-#dropdown-basic-button {
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
     font-size: 16px;
-    font-weight: 500;
-    color: #007bff; /* Color de texto del botón */
-    border: 1px solid #007bff; /* Borde del botón */
-    background-color: white; /* Fondo blanco */
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.menu_horizontal {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu_horizontal > li {
+    position: relative;
+    padding: 0 20px;
+    color: white;
     cursor: pointer;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 64px; 
+    transition: background-color 0.3s ease;
 }
 
-/* Estilo del botón cuando se pasa el ratón sobre él */
-#dropdown-basic-button:hover {
-    background-color: #f1f1f1;
-    color: #0056b3;
-    border-color: #0056b3;
-}
-
-/* Estilos del Dropdown */
-.dropdown-menu {
-    background-color: #ffffff; /* Fondo del menú */
-    border: 1px solid #007bff; /* Borde del menú */
+.menu_horizontal > li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra del menú */
 }
 
-/* Estilo para los elementos del menú */
-.dropdown-item {
-    font-size: 14px;
-    color: #333; /* Color de texto */
+.menu_vertical {
+    display: block; /* Asegúrate de que esté configurado como block */
+    position: absolute;
+    top: 63px; /* Ajusta según tu diseño */
+    left: 0;
+    background-color: black;
+    list-style: none;
+    padding: 10px 0;
+    margin-left: 9%;
+    z-index: 1010;
+}
+
+
+.menu_horizontal li:hover .menu_vertical {
+    display: block;
+    top: 100%;
+    left: 0;
+}
+
+.menu_vertical li {
     padding: 10px 15px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Estilo cuando se pasa el ratón sobre los elementos del menú */
-.dropdown-item:hover {
-    background-color: #007bff;
-    color: white;
+.menu_vertical li:hover {
+    background-color: rgb(255, 1, 1);
 }
 
-/* Opcional: Estilo para los elementos seleccionados */
-.dropdown-item:active {
-    background-color: #0056b3;
+.menu_vertical li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+h1 {
     color: white;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
